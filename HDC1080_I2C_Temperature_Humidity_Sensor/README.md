@@ -1,4 +1,4 @@
-# HDC1080 I2C Driver
+# HDC1080 I2C Driver (C++)
 The HDC1080 is a simple and cheap temperature and relative humidity sensor that communicates via I2C. As of 02/18/2022 there do not appear to be any public I2C drivers for this sensor when working with the RP2040 microcontroller. This is a driver I wrote while studying Real Time Operating Systems. It is friendly to new users and provides enough configurability for advanced users to get the level of control needed for advanced projects.
 
 ## Pre-requisites
