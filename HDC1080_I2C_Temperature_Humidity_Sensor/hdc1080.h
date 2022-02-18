@@ -47,6 +47,7 @@ class HDC1080 {
 
     public:
         HDC1080(i2c_inst_t* i2c_port);
+        HDC1080();
 
         void set_config(HDC_Config);    // set the device for measurement, heater, checking battery voltage
         void set_heater(bool);          // set heater on/off to remove condensation from the humidity sensor

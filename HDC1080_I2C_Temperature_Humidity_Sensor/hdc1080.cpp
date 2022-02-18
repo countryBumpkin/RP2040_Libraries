@@ -16,6 +16,10 @@ HDC1080::HDC1080(i2c_inst_t* i2c_port){
     I2C_PORT = i2c_port;
 }
 
+HDC1080::HDC1080(void){
+    I2C_PORT = i2c0;
+}
+
 /*
  * Write a 16 bit config value to the config register. This must be done before taking a measurement.
  *  Also use this for reading battery voltage warnings and turning on the heater.
