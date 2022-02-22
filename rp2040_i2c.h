@@ -1,3 +1,10 @@
+/*
+ * Defines some helper functions for using I2C on the RP2040 microcontroller.
+ */
+
+#ifndef RP2040_I2C_H
+#define RP2040_I2C_H
+
 #include <hardware/i2c.h>
 #include <pico/stdlib.h>
 
@@ -12,3 +19,5 @@ void init_i2c(i2c_inst_t* i2c_port){
     gpio_pull_up(PICO_DEFAULT_I2C_SCL_PIN);
     sleep_ms(500);
 }
+
+#endif
