@@ -2,6 +2,9 @@
 #include <pico/stdlib.h>
 #include <stdio.h>
 
+/*
+ * Construct a new object with pin definitions and default states.
+ */
 SM_28BYJ_48::SM_28BYJ_48(int in1, int in2, int in3, int in4){
     IN1 = in1;
     IN2 = in2;
@@ -29,6 +32,9 @@ SM_28BYJ_48::SM_28BYJ_48(int in1, int in2, int in3, int in4){
     gpio_put(IN4, false);
 }
 
+/*
+ * Base step function. Uses direction, step size set by other step(direction) and warp_speed_mr_sulu(direction)
+ */
 void SM_28BYJ_48::step(void){
     if(state > 7 || state < 0){ // out of bounds so reset
         if(direction){
@@ -101,14 +107,27 @@ void SM_28BYJ_48::step(void){
 
 }
 
+/*
+ * Tell the motor to take one step in a specific direction, does not change speed.
+ */
 void SM_28BYJ_48::step(Direction dir){
     direction = dir;
-    step_size = 1; // make sure we are moving at the default rate
-    if(direction)
-        state = 7;
     step();
 }
 
+/*
+ * Allows setting the direction to either clockwise(CW) or counter-clockwise(CCW)
+ *  WARNING: resets the step size to 1
+ */
+void SM_28BYJ_48::turtle_speed(Direction dir){
+    direction = dir;
+    step_size = 1;
+    step();
+}
+
+/*
+ * Config option that sets the step size to 2, and sets the direction.
+ */
 void SM_28BYJ_48::warp_speed_mr_sulu(Direction dir){
     step_size = 2;
     direction = dir;

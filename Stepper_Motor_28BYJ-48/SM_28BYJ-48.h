@@ -22,8 +22,8 @@ class SM_28BYJ_48 {
 
         SM_28BYJ_48(int in1, int in2, int in3, int in4);
         void step(void);        // take the next step with the motor, always steps clockwise
-        void step(Direction);   // take the next step, true==CW, false==CCW
-
-        void warp_speed_mr_sulu(Direction);
+        void step(Direction);   // take one step in the direction, don't change speed
+        void turtle_speed(Direction);       // set the direction and set speed to 1
+        void warp_speed_mr_sulu(Direction); // set the direction and set speed to 2
 
 };
