@@ -37,14 +37,14 @@ SM_28BYJ_48::SM_28BYJ_48(int in1, int in2, int in3, int in4){
  */
 void SM_28BYJ_48::step(void){
     if(state > 7 || state < 0){ // out of bounds so reset
-        if(direction){
+        if(!direction){
             state = 0;
         }else{
             state = 7;
         }
     }
 
-    printf("[STEPPER] setting state = %i\n", state);
+    //printf("[STEPPER] setting state = %i\n", state);
     switch(STATE[state]){
         case 0x08:
             gpio_put(IN4, 1);
@@ -103,7 +103,8 @@ void SM_28BYJ_48::step(void){
             break;
     }
 
-    state += direction ? step_size : -1*step_size;
+    state += direction ? -1*step_size : step_size;
+    offset_since_epoch += direction ? -1*step_size : step_size; // net distance traveled from home starting pos
 
 }
 
@@ -131,4 +132,11 @@ void SM_28BYJ_48::turtle_speed(Direction dir){
 void SM_28BYJ_48::warp_speed_mr_sulu(Direction dir){
     step_size = 2;
     direction = dir;
+}
+
+/*
+ * Get the state/phase of the motor, which corresponds to the pin activation sequence
+ */
+int SM_28BYJ_48::get_state(void){
+    return this->state;
 }
